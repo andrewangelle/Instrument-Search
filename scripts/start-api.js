@@ -4,7 +4,7 @@
 //====================================================================
 
 var express = require('express');
-var app = express();				
+var app = express();
 var bodyParser = require('body-parser');
 var pg = require('pg');
 var dotenv = require('dotenv');
@@ -22,7 +22,7 @@ var port = process.env.PORT || 8080;	//set our port
 //ROUTES FOR API
 //======================================================================
 
-var router = express.Router();			
+var router = express.Router();
 var pool = new pg.Pool();
 
 //TEST ROUTE (accessed at GET http://localhost:8080/api)
@@ -36,7 +36,10 @@ router.get('/search', function(req,res) {
 
   for (var key in req.query) {
     var value = req.query[key];
-    dbQuery = `${dbQuery} and ${key} = '${value}'`;
+
+    if (value) {
+      dbQuery = `${dbQuery} and ${key} = '${value}'`;
+    }
   }
 
   pool.connect()
@@ -177,29 +180,12 @@ router.get('/instrument/delete', function(req,res){
     });
 });
 
-app.get('/admin/instruments', function(req, res) {
-  res.sendFile('instruments.html', { root: process.cwd() });
-});
-
-app.get('/admin/instrument/:instrumentName/edit', function(req, res) {
-  res.sendFile('instrument.html', { root: process.cwd() });
-});
-
-app.get('/admin/instrument/create', function(req, res) {
-  res.sendFile('create-instrument.html', { root: process.cwd() });
-});
-
 //REGISTER OUR ROUTES-------------------------------
 //all of our routes will be prefixed with /api
 app.use('/api', router);
-
-// Serve all static files in the root directory
-app.use(express.static(__dirname));
-
 
 // START THE SERVER
 //==========================================================================
 
 app.listen(port);
 console.log('port at : ' + port);
- 
