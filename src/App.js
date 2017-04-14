@@ -18,7 +18,18 @@ class InstrumentSearchForm extends React.Component {
         name: 'Tuba',
         family: 'Brass',
         clef: 'Bass'        
-      }
+      },
+      {
+        name: 'Oboe',
+        family: 'Woodwinds',
+        clef: 'Treble'        
+      },
+      {
+        name: 'Piano',
+        family: 'Percussion',
+        clef: 'Grand Staff'        
+      }      
+      
 
       ]
     };
