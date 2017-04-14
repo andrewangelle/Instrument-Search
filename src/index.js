@@ -1,9 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
-import './index.css';
+import InstrumentSearch from './InstrumentSearch';
+
 
 ReactDOM.render(
-  <App />,
+  <InstrumentSearch />,
   document.getElementById('root')
 );
