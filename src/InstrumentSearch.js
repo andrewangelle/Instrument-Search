@@ -7,32 +7,10 @@ export default class InstrumentSearch extends React.Component {
       name: '',
       family: '',
       clef: '',
-      instruments:[
-      {
-        name: 'Violin',
-        family: 'Strings',
-        clef: 'Treble'
-      },
-      {
-        name: 'Tuba',
-        family: 'Brass',
-        clef: 'Bass'        
-      },
-      {
-        name: 'Oboe',
-        family: 'Woodwinds',
-        clef: 'Treble'        
-      },
-      {
-        name: 'Piano',
-        family: 'Percussion',
-        clef: 'Grand Staff'        
-      }      
-      
-
-      ]
+      instruments:[ ]
     };
   }
+
 
   handleNameChange(event) {
     this.setState({name: event.target.value});
@@ -45,8 +23,29 @@ export default class InstrumentSearch extends React.Component {
   handleClefChange(event) {
     this.setState({clef: event.target.value});
   }
+
   handleSubmit(event) {
-    
+    event.preventDefault();
+
+    //get form values and user input
+    const { name,family,clef,instruments } = this.state;
+    console.log({name},{family},{clef},{instruments});
+
+    //construct query string param
+
+
+    //inject the query string param into the url for api call
+    //convert response to json
+    //update this.state.instruments with results
+    fetch(`api/search?name=${name}`)
+    .then(function(response) { 
+      return response.json();
+    })   
+    .then(function(results) {
+      console.log(results)
+    });
+
+
   }
 
   render() {
@@ -88,7 +87,7 @@ export default class InstrumentSearch extends React.Component {
 
       <ul>
         {this.state.instruments.map(instrument =>
-          <li> {instrument.name} </li>
+          <li> {this.instruments.state.name} </li>
         )}
       </ul>
     </div>
