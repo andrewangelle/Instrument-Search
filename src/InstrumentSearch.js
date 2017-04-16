@@ -9,8 +9,13 @@ export default class InstrumentSearch extends React.Component {
       clef: '',
       instruments:[ ]
     };
+
+    this.updateResults = this.updateResults.bind(this);
   }
 
+  updateResults(results) {
+    this.setState({instruments: results})
+  }
 
   handleNameChange(event) {
     this.setState({name: event.target.value});
@@ -24,6 +29,7 @@ export default class InstrumentSearch extends React.Component {
     this.setState({clef: event.target.value});
   }
 
+
   handleSubmit(event) {
     event.preventDefault();
 
@@ -36,13 +42,14 @@ export default class InstrumentSearch extends React.Component {
 
     //inject the query string param into the url for api call
     //convert response to json
-    //update this.state.instruments with results
+    //console.log results
     fetch(`api/search?name=${name}`)
     .then(function(response) { 
       return response.json();
-    })   
-    .then(function(results) {
-      console.log(results)
+    })
+    .then(results => {
+      this.updateResults(results);
+      console.log(results);
     });
 
 
@@ -87,7 +94,7 @@ export default class InstrumentSearch extends React.Component {
 
       <ul>
         {this.state.instruments.map(instrument =>
-          <li> {this.instruments.state.name} </li>
+          <li> {this.state.instruments.name} </li>
         )}
       </ul>
     </div>
