@@ -37,12 +37,12 @@ export default class InstrumentSearch extends React.Component {
     const { name,family,clef,instruments } = this.state;
     console.log({name},{family},{clef},{instruments});
 
-    //construct query string param
+    //construct query string param w/values
 
 
     //inject the query string param into the url for api call
     //convert response to json
-    //console.log results
+    //update & log results
     fetch(`api/search?name=${name}`)
     .then(function(response) { 
       return response.json();
