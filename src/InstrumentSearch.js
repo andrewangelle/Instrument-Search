@@ -7,14 +7,16 @@ export default class InstrumentSearch extends React.Component {
       name: '',
       family: '',
       clef: '',
-      instruments:[ ]
+      instruments:[]
     };
-
     this.updateResults = this.updateResults.bind(this);
   }
 
   updateResults(results) {
-    this.setState({instruments: results})
+
+    this.setState({
+      instruments: results
+    });
   }
 
   handleNameChange(event) {
@@ -94,9 +96,12 @@ export default class InstrumentSearch extends React.Component {
 
       <ul>
         {this.state.instruments.map(instrument =>
-          <li> {this.state.instruments.name} </li>
+          <li key={this.state.instruments}> 
+            {instrument.name}
+          </li>        
         )}
       </ul>
+
     </div>
     );
   }
