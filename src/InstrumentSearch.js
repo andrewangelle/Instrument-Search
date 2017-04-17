@@ -39,6 +39,7 @@ export default class InstrumentSearch extends React.Component {
     const { name,family,clef,instruments } = this.state;
     console.log({name},{family},{clef},{instruments});
 
+
     //construct query string param
     let url = '';
 
