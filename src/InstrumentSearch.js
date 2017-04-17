@@ -40,12 +40,20 @@ export default class InstrumentSearch extends React.Component {
     console.log({name},{family},{clef},{instruments});
 
     //construct query string param
+    let url = '';
 
+    if ({name}) {
+      url = `?name=${name}`;
+    }
+    if ({family}) {
+      url = `?family=${family}`;
+    }
+    console.log(url);
 
-    //inject the query string param into the url for api call
-    //convert response to json
-    //console.log results
-    fetch(`api/search?name=${name}`)
+    //inject the query string param into the fetch url for the api call
+    //convert db response to json
+    //log and update results
+    fetch('api/search'+url)
     .then(function(response) { 
       return response.json();
     })
@@ -96,7 +104,7 @@ export default class InstrumentSearch extends React.Component {
 
       <ul>
         {this.state.instruments.map(instrument =>
-          <li key={this.state.instruments}> 
+          <li key={instrument.id}> 
             <button>{instrument.name}</button>
           </li>        
         )}
