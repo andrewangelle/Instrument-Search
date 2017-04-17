@@ -97,7 +97,7 @@ export default class InstrumentSearch extends React.Component {
       <ul>
         {this.state.instruments.map(instrument =>
           <li key={this.state.instruments}> 
-            {instrument.name}
+            <button>{instrument.name}</button>
           </li>        
         )}
       </ul>
