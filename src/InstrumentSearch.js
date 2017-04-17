@@ -33,36 +33,6 @@ export default class InstrumentSearch extends React.Component {
 
 
   handleSubmit(event) {
-    event.preventDefault();
-
-    //get form values and user input
-    const { name,family,clef,instruments } = this.state;
-    console.log({name},{family},{clef},{instruments});
-
-
-    //construct query string param
-    let url = '';
-
-    if ({name}) {
-      url = `?name=${name}`;
-    }
-    if ({family}) {
-      url = `?family=${family}`;
-    }
-    console.log(url);
-
-    //inject the query string param into the fetch url for the api call
-    //convert db response to json
-    //log and update results
-    fetch('api/search'+url)
-    .then(function(response) { 
-      return response.json();
-    })
-    .then(results => {
-      this.updateResults(results);
-      console.log(results);
-    });
-
 
   }
 
