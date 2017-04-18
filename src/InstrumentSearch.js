@@ -1,54 +1,70 @@
 import React, { Component } from 'react';
 
 export default class InstrumentSearch extends React.Component {
+
   constructor(props) {
     super(props);
+
     this.state = {
       name: '',
       family: '',
       clef: '',
       instruments:[]
     };
+
     this.updateResults = this.updateResults.bind(this);
   }
 
-  updateResults(results) {
 
-    this.setState({
-      instruments: results
-    });
+
+  updateResults(results) {
+    this.setState({instruments: results});
   }
 
   handleNameChange(event) {
+
     this.setState({name: event.target.value});
+
   }
 
   handleFamilyChange(event) {
+
     this.setState({family: event.target.value});
+
   }
 
   handleClefChange(event) {
+
     this.setState({clef: event.target.value});
   }
 
 
+
   handleSubmit(event) {
+
     event.preventDefault();
 
-    //get form values and user input
-    const { name,family,clef,instruments } = this.state;
-    console.log({name},{family},{clef},{instruments});
+    var name = this.state.name;
+    var family = this.state.family;
+    var clef = this.state.clef;
+    var url = '?';
 
-
-    //construct query string param
-    let url = '';
-
-    if ({name}) {
-      url = `?name=${name}`;
+    if(name) {
+      var newURL = `name=${name}`;
+      url = url+newURL;
     }
-    if ({family}) {
-      url = `?family=${family}`;
+    if(family){
+      var newURL = `family=${family}`;
+      url = url+newURL;
     }
+    if(clef){
+      var newURL = `&clef=${clef}`;
+      url = url+newURL;
+    }
+    else {
+      
+    }
+
     console.log(url);
 
     //inject the query string param into the fetch url for the api call
@@ -62,7 +78,6 @@ export default class InstrumentSearch extends React.Component {
       this.updateResults(results);
       console.log(results);
     });
-
 
   }
 
@@ -79,7 +94,7 @@ export default class InstrumentSearch extends React.Component {
         <label>
           Family:
           <select type="dropdown" value={this.state.family} onChange={this.handleFamilyChange.bind(this)}>
-            <option value="Placeholder"></option>
+            <option></option>
             <option value="Strings">Strings</option>
             <option value="Brass">Brass</option>
             <option value="Woodwinds">Woodwinds</option>
@@ -91,7 +106,7 @@ export default class InstrumentSearch extends React.Component {
         <label>
           Clef:
           <select type="dropdown" value={this.state.clef} onChange={this.handleClefChange.bind(this)}>
-            <option value="Placeholder"></option>
+            <option></option>
             <option value="Treble">Treble</option>
             <option value="Bass">Bass</option>
             <option value="Grand Staff">Grand Staff</option>
@@ -106,7 +121,7 @@ export default class InstrumentSearch extends React.Component {
       <ul>
         {this.state.instruments.map(instrument =>
           <li key={instrument.id}> 
-            <button>{instrument.name}</button>
+              <button>{instrument.name}</button>
           </li>        
         )}
       </ul>
