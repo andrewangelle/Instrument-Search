@@ -6,13 +6,12 @@ export default class InstrumentAdmin extends React.Component {
 		super(props);
 
     	this.state = {
-      		name: '',
-      		family: '',
-      		clef: '',
+
       		instruments:[]
     	};
 
     	this.updateInstrumentArray = this.updateInstrumentArray.bind(this);
+      this.fetchInstruments = this.fetchInstruments.bind(this);
 	};
 
 	updateInstrumentArray(instruments) {
@@ -32,20 +31,14 @@ export default class InstrumentAdmin extends React.Component {
 	}
 
 	componentDidMount(){
-		this.fetchInstruments().bind(this);
+		this.fetchInstruments();
 	}
 
 	render() {
 		return (
 		  <div>
-      		<ul>
-        		{this.state.instruments.map(instrument =>
-          		<li key={instrument.id}> 
-              		<button>{instrument.name}</button>
-          		</li>        
-        		)}
-      		</ul>
-      	  </div>
+          <h4>I am working</h4>
+      </div>
 		);
 	}
 }
