@@ -60,7 +60,11 @@
   "scripts": {
     "start": "concurrently -k \"nodemon scripts/start-api.js\" \"node scripts/start.js\"",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom"
+    "test": "node scripts/test.js --env=jsdom",
+    "migrate": "db-migrate up",
+    "create-migration": "db-migrate create --sql-file",
+    "prestart": "npm run migrate",
+    "reset": "db-migrate reset && npm run migrate"
   },
   "jest": {
     "collectCoverageFrom": [
