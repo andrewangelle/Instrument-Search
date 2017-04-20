@@ -1,9 +1,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import InstrumentSearch from './InstrumentSearch';
+import InstrumentApp from './routes';
 
 ReactDOM.render(
-  <InstrumentSearch />,
+  <InstrumentApp />,
   document.getElementById('root')
 );
