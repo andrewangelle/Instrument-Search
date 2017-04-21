@@ -1,22 +1,21 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Router, Route, hashHistory } from 'react-router';
-import InstrumentSearch from './InstrumentSearch';
+import { Router, Route, Switch } from 'react-router-dom';
+import createHistory from 'history/createBrowserHistory';
+import HomePage from './HomePage';
+import NextPage from './NextPage';
 
-export default class Home extends React.Component {
-	render(){
-		return(
-			<InstrumentSearch />
-		);
-	}
-}
+const history = createHistory();
 
 ReactDOM.render(
-      <Router history={ hashHistory }>
-        <Route path="/" component={Home} />      
+      <Router history={history} >
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/next" component={NextPage} />
+        </Switch>      
       </Router>, 
-  
+
 	document.getElementById('root')
 );  
 
