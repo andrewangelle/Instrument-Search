@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+
 export default class InstrumentSearch extends React.Component {
 
   constructor(props) {
@@ -22,19 +23,14 @@ export default class InstrumentSearch extends React.Component {
   }
 
   handleNameChange(event) {
-
     this.setState({name: event.target.value});
-
   }
 
   handleFamilyChange(event) {
-
     this.setState({family: event.target.value});
-
   }
 
   handleClefChange(event) {
-
     this.setState({clef: event.target.value});
   }
 
@@ -53,14 +49,17 @@ export default class InstrumentSearch extends React.Component {
       var newURL = `name=${name}`;
       url = url+newURL;
     }
+
     if(family){
       var newURL = `family=${family}`;
       url = url+newURL;
     }
+
     if(clef){
       var newURL = `&clef=${clef}`;
       url = url+newURL;
     }
+    
     else {
       
     }

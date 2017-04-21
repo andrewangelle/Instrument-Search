@@ -1,10 +1,22 @@
 
 import React from 'react';
-import { Router, Route, Link, hashHistory } from 'react-router';
 import ReactDOM from 'react-dom';
-import InstrumentApp from './App';
+import { Router, Route, hashHistory } from 'react-router';
+import InstrumentSearch from './InstrumentSearch';
+
+export default class Home extends React.Component {
+	render(){
+		return(
+			<InstrumentSearch />
+		);
+	}
+}
 
 ReactDOM.render(
-  <InstrumentApp />,
-  document.getElementById('root')
-);
+      <Router history={ hashHistory }>
+        <Route path="/" component={Home} />      
+      </Router>, 
+  
+	document.getElementById('root')
+);  
+
