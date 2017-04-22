@@ -25,6 +25,10 @@ export default class HomePage extends React.Component {
 
 		  <hr/>
 
+
+		  <h3>Header Component Will Go Here...</h3>
+
+		  <hr/>
           <Switch>
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/search" component={InstrumentSearch} />
