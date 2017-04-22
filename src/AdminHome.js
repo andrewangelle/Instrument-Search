@@ -43,26 +43,22 @@ export default class AdminHome extends React.Component {
   return(
     <Router history={history} >
       <div>
-        <ul>
-          <li><Link to="/search">Search</Link></li>
-        </ul>
 
-      <hr/>
+
 
 
         <ul>
           {this.state.instruments.map(instrument =>
           <li key={instrument.id}> 
             <button>
-              {instrument.name}
+              <Link to="edit">{instrument.name}</Link>
             </button>
           </li>        
           )}
         </ul>
 
-      <hr/>
+
           <Switch>
-            <Route exact path="/search" component={InstrumentSearch} />
             <Route exact path="/edit" component={AdminEdit} />
           </Switch>   
     </div>     
