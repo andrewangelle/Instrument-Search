@@ -4,21 +4,25 @@ import {
   Route,
   Link,
   Switch 
-} from 'react-router-dom';
-import NextPage from './NextPage';
+} from 'react-router-dom'
+import createHistory from 'history/createBrowserHistory';
+import InstrumentSearch from './InstrumentSearch';
+import AdminEdit from './AdminEdit';
 
+
+const history = createHistory();
 
 export default class AdminHome extends React.Component {
   constructor(props){
-		super(props);
+    super(props);
 
-		this.state={
-			instruments: []
-		};
+    this.state={
+      instruments: []
+    };
 
-		this.updateResults = this.updateResults.bind(this);
+    this.updateResults = this.updateResults.bind(this);
 
-	}
+  }
   updateResults(results) {
 
     this.setState({instruments: results});
@@ -35,10 +39,17 @@ export default class AdminHome extends React.Component {
         console.log(results);
       });
   }
+  render(){
+  return(
+    <Router history={history} >
+      <div>
+        <ul>
+          <li><Link to="/search">Search</Link></li>
+        </ul>
 
-	render(){
-		return(
-		  <div>
+      <hr/>
+
+
         <ul>
           {this.state.instruments.map(instrument =>
           <li key={instrument.id}> 
@@ -46,11 +57,21 @@ export default class AdminHome extends React.Component {
               {instrument.name}
             </button>
           </li>        
-        	)}
-      	</ul>
-			</div>
-		);
-	}
+          )}
+        </ul>
+
+      <hr/>
+          <Switch>
+            <Route exact path="/search" component={InstrumentSearch} />
+            <Route exact path="/edit" component={AdminEdit} />
+          </Switch>   
+    </div>     
+      </Router>   
+  );
+  }
 }
+
+
+
 
 
