@@ -26,7 +26,7 @@ export default class HomePage extends React.Component {
 		  <hr/>
 
 
-		  <h3>Header Component Will Go Here...</h3>
+		  <h3>Header Component With Props</h3>
 
 		  <hr/>
           <Switch>

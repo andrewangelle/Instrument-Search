@@ -1,11 +1,19 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch 
+} from 'react-router-dom';
+import NextPage from './NextPage';
+
 
 export default class AdminHome extends React.Component {
   constructor(props){
 		super(props);
 
 		this.state={
-			instruments: [ ]
+			instruments: []
 		};
 
 		this.updateResults = this.updateResults.bind(this);
@@ -14,11 +22,6 @@ export default class AdminHome extends React.Component {
   updateResults(results) {
 
     this.setState({instruments: results});
-
-  }
-  handleInstrumentClick(event) {
-
-    console.log('Instrument was clicked')
 
   }
   componentDidMount() {
@@ -39,7 +42,9 @@ export default class AdminHome extends React.Component {
         <ul>
           {this.state.instruments.map(instrument =>
           <li key={instrument.id}> 
-            <button onClick={this.handleInstrumentClick.bind(this)}>{instrument.name}</button>
+            <button>
+              {instrument.name}
+            </button>
           </li>        
         	)}
       	</ul>
@@ -47,4 +52,5 @@ export default class AdminHome extends React.Component {
 		);
 	}
 }
+
 
