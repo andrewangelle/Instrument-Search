@@ -8,7 +8,6 @@ import {
 import createHistory from 'history/createBrowserHistory';
 import InstrumentSearch from './InstrumentSearch';
 import AdminHome from './AdminHome';
-import AdminEdit from './AdminEdit';
 
 
 const history = createHistory();
@@ -22,7 +21,6 @@ export default class HomePage extends React.Component {
 		    <li><Link to="/home">Home</Link></li>
 		    <li><Link to="/search">Search</Link></li>
 		    <li><Link to="/admin">Admin</Link></li>
-		    <li><Link to="/edit">Edit</Link></li>
 		  </ul>
 
 		  <hr/>
@@ -35,7 +33,6 @@ export default class HomePage extends React.Component {
             <Route exact path="/home" component={HomePage} />
             <Route exact path="/search" component={InstrumentSearch} />
             <Route exact path="/admin" component={AdminHome} />
-            <Route exact path="/edit" component={AdminEdit} />
           </Switch> 	
 		</div>     
       </Router> 	

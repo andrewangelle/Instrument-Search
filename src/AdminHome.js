@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router 
 } from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
+import AdminEdit from './AdminEdit';
 
 const history = createHistory();
 
@@ -46,7 +47,12 @@ export default class AdminHome extends React.Component {
           </li>        
           )}
         </ul>
-      </div>     
+
+        <hr />
+
+        <AdminEdit />
+
+      </div>    
     </Router>   
   );
   }
