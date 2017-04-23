@@ -11,15 +11,25 @@ export default class AdminEdit extends React.Component {
       	allTransposes: []
     }
 
-    this.updateFamilyDropdown = this.updateFamilyDropdown.bind(this);  
+    this.updateTransposesDropdown = this.updateTransposesDropdown.bind(this);
+    this.updateSoundsDropdown = this.updateSoundsDropdown.bind(this);
+    this.updateFamilyDropdown = this.updateFamilyDropdown.bind(this);
+    this.updateClefDropdown = this.updateClefDropdown.bind(this);  
   }
-
+  updateTransposesDropdown(results){
+    this.setState({allTransposes: results});
+  }
+  updateSoundsDropdown(results) {
+    this.setState({allSounds: results});
+  }
   updateFamilyDropdown(results) {
   	this.setState({allFamilies: results});
   }
+  updateClefDropdown(results) {
+    this.setState({allClefs: results});
+  }  
 
-  componentDidMount() {
-  //Promise.All 
+  componentDidMount() { 
   // make fetch calls
   // convert responses to json
   // update the individual entries in rendered form with all possible options
@@ -33,6 +43,30 @@ export default class AdminEdit extends React.Component {
       	console.log(results);
         this.updateFamilyDropdown(results);
       });
+    fetch('/api/clefs')
+      .then(response => {
+        return response.json()
+    })
+      .then(results => {
+        console.log(results);
+        this.updateClefDropdown(results);
+    });
+    fetch('/api/sounds')
+      .then(response => {
+        return response.json()
+    })
+      .then(results => {
+        console.log(results);
+        this.updateSoundsDropdown(results);
+    });
+    fetch('/api/transposes')
+      .then(response => {
+        return response.json()
+    })
+      .then(results => {
+        console.log(results);
+        this.updateTransposesDropdown(results);
+    });              
   }
 
   render(){
@@ -47,40 +81,52 @@ export default class AdminEdit extends React.Component {
           <br />
             <label>
               Family:
-              <select type="dropdown">
-                {this.state.allFamilies.map(family => 
-                <option>{family}</option>
-                )}
+              <select type="dropdown" value="placeholder">
+                <option value="placeholder"></option>               
+                {this.state.allFamilies.map(oneFamily => 
+                <option>{oneFamily}</option>
+                )}               
               </select>
             </label>
           <br />
           <br />
             <label>
               Clef:
-              <select type="dropdown">
-                <option>{this.state.allClefs}</option>
-              </select>
+              <select type="dropdown" value="placeholder">
+                <option value="placeholder"></option>              
+                {this.state.allClefs.map(oneClef => 
+                <option>{oneClef}</option>
+                )}
+              </select>  
             </label>
           <br />
           <br />
             <label>
               Sounds:
-              <select type="dropdown">
-                <option>{this.state.allSounds}</option>
+              <select type="dropdown" value="placeholder">
+                <option value="placeholder"></option>              
+                {this.state.allSounds.map(oneSound => 
+                <option>{oneSound}</option>
+                )}                
               </select>
             </label>
           <br />
           <br />
             <label>
               Transposes:
-              <select type="dropdown" >
-                <option>{this.state.allTransposes}</option>
+              <select type="dropdown" value="placeholder">
+                <option value="placeholder"></option>              
+                {this.state.allTransposes.map(oneTranspose => 
+                <option>{oneTranspose}</option>
+                )}               
               </select>
             </label>
           <br />
           <br />
-            <input type="submit" value="Submit" />
+            <input type="submit" value="Save Changes" />
         </form>
+
+        <button>Delete Instrument</button>
       </div>  
   		);
   }
