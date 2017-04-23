@@ -51,16 +51,14 @@ export default class AdminHome extends React.Component {
           {this.state.instruments.map(instrument =>
           <li key={instrument.id}> 
             <button>
-              <Link to="edit">{instrument.name}</Link>
+              {instrument.name}
             </button>
           </li>        
           )}
         </ul>
 
 
-          <Switch>
-            <Route exact path="/edit" component={AdminEdit} />
-          </Switch>   
+
     </div>     
       </Router>   
   );

@@ -5,6 +5,11 @@ export default class AdminEdit extends React.Component {
   	    super(props);
 
       this.state={
+      	name:"",
+      	allFamilies: [],
+      	allClefs: [],
+      	allSounds: [],
+      	allTransposes: [],
       	instruments: []
     }
 
@@ -26,6 +31,33 @@ export default class AdminEdit extends React.Component {
   // make fetch calls
   // convert responses to json
   // update the individual entries in rendered form with all possible options
+  
+  //var name = {match.params.id}
+
+    Promise.All([
+     //fetch(`/api/search?name=${name}`)
+      fetch('/api/families'),
+	  fetch('/api/clefs'),
+      fetch('/api/sounds'),
+      fetch('/api/transposes')
+    ])
+      .then(responses => {
+      	return Promise.all([
+      	  responses[0].json(),
+      	  responses[1].json(),
+      	  responses[2].json(),
+		  responses[3].json(),
+		  responses[4].json()
+		 ]);
+	})
+      .then(results => {
+      	console.log(results);
+      });
+
+
+
+
+
   }
 
   componentWillReceiveProps() {
@@ -50,7 +82,7 @@ export default class AdminEdit extends React.Component {
             <label>
               Family:
               <select type="dropdown">
-                <option></option>
+                <option>{this.state.allFamilies}</option>
               </select>
             </label>
           <br />
@@ -58,7 +90,7 @@ export default class AdminEdit extends React.Component {
             <label>
               Clef:
               <select type="dropdown">
-                <option></option>
+                <option>{this.state.allClefs}</option>
               </select>
             </label>
           <br />
@@ -66,7 +98,7 @@ export default class AdminEdit extends React.Component {
             <label>
               Sounds:
               <select type="dropdown">
-                <option></option>
+                <option>{this.state.allSounds}</option>
               </select>
             </label>
           <br />
@@ -74,7 +106,7 @@ export default class AdminEdit extends React.Component {
             <label>
               Transposes:
               <select type="dropdown" >
-                <option></option>
+                <option>{this.state.allTransposes}</option>
               </select>
             </label>
           <br />
