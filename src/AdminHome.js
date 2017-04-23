@@ -1,11 +1,6 @@
 import React from 'react';
-import {
-  BrowserRouter as Router 
-} from 'react-router-dom';
-import createHistory from 'history/createBrowserHistory';
+import { Link } from 'react-router-dom';
 import AdminEdit from './AdminEdit';
-
-const history = createHistory();
 
 export default class AdminHome extends React.Component {
   constructor(props){
@@ -15,10 +10,10 @@ export default class AdminHome extends React.Component {
       instruments: []
     };
 
-    this.updateResults = this.updateResults.bind(this);
+    this.displayDataBaseEntries = this.displayDataBaseEntries.bind(this);
 
   }
-  updateResults(results) {
+  displayDataBaseEntries(results) {
 
     this.setState({instruments: results});
 
@@ -30,31 +25,26 @@ export default class AdminHome extends React.Component {
         return response.json();
       })
       .then(results => {
-        this.updateResults(results);
+        this.displayDataBaseEntries(results);
         console.log(results);
       });
   }
   render(){
-  return(
-    <Router history={history} >
+    return(
       <div>
         <ul>
           {this.state.instruments.map(instrument =>
-          <li key={instrument.id}> 
-            <button>
-              {instrument.name}
-            </button>
-          </li>        
+            <li key={instrument.id}> 
+              <Link to="/admin/edit/:id">
+                <button>
+                  {instrument.name}
+                </button>
+              </Link>
+            </li>        
           )}
         </ul>
-
-        <hr />
-
-        <AdminEdit />
-
-      </div>    
-    </Router>   
-  );
+      </div> 
+    );  
   }
 }
 
