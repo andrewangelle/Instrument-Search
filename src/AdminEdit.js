@@ -2,30 +2,22 @@ import React from 'react';
 
 export default class AdminEdit extends React.Component {
   constructor(props){
-  	    super(props);
+  	super(props);
 
-      this.state={
-      	name:"",
+  	  this.state={
       	allFamilies: [],
       	allClefs: [],
       	allSounds: [],
-      	allTransposes: [],
-      	instruments: []
+      	allTransposes: []
     }
 
-    this.updateResults = this.updateResults.bind(this);
-  
+    this.updateFamilyDropdown = this.updateFamilyDropdown.bind(this);  
   }
-  updateResults(results) {
 
-    this.setState({instruments: results});
+  updateFamilyDropdown(results) {
+  	this.setState({allFamilies: results});
+  }
 
-  }
-  handleSubmit(event){
-  
-  	event.preventDefault;
-  
-  }
   componentDidMount() {
   //Promise.All 
   // make fetch calls
@@ -33,46 +25,20 @@ export default class AdminEdit extends React.Component {
   // update the individual entries in rendered form with all possible options
   
   //var name = {match.params.id}
-
-    Promise.All([
-     //fetch(`/api/search?name=${name}`)
-      fetch('/api/families'),
-	  fetch('/api/clefs'),
-      fetch('/api/sounds'),
-      fetch('/api/transposes')
-    ])
-      .then(responses => {
-      	return Promise.all([
-      	  responses[0].json(),
-      	  responses[1].json(),
-      	  responses[2].json(),
-		  responses[3].json(),
-		  responses[4].json()
-		 ]);
-	})
+    fetch('/api/families')
+      .then(response => {
+      	return response.json()
+      })
       .then(results => {
       	console.log(results);
+        this.updateFamilyDropdown(results);
       });
-
-
-
-
-
-  }
-
-  componentWillReceiveProps() {
-  	//get ahold of id passed from AdminHome 
-  	//set value of form field with the:
-  	//f
-  	//.name/.family/.clef/.sounds/.transposes
-  	// that match the id props from previous event
-
   }
 
   render(){
   	return(
   	  <div> 
-          <form onSubmit={this.handleSubmit.bind(this)}>
+          <form>
             <label>
               Name:
               <input type="text"/> 
@@ -82,7 +48,9 @@ export default class AdminEdit extends React.Component {
             <label>
               Family:
               <select type="dropdown">
-                <option>{this.state.allFamilies}</option>
+                {this.state.allFamilies.map(family => 
+                <option>{family}</option>
+                )}
               </select>
             </label>
           <br />

@@ -16,8 +16,6 @@ export default class InstrumentSearch extends React.Component {
     this.updateResults = this.updateResults.bind(this);
   }
 
-
-
   updateResults(results) {
     this.setState({instruments: results});
   }

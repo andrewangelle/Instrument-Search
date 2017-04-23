@@ -1,14 +1,8 @@
 import React from 'react';
 import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch 
-} from 'react-router-dom'
+  BrowserRouter as Router 
+} from 'react-router-dom';
 import createHistory from 'history/createBrowserHistory';
-import InstrumentSearch from './InstrumentSearch';
-import AdminEdit from './AdminEdit';
-
 
 const history = createHistory();
 
@@ -43,10 +37,6 @@ export default class AdminHome extends React.Component {
   return(
     <Router history={history} >
       <div>
-
-
-
-
         <ul>
           {this.state.instruments.map(instrument =>
           <li key={instrument.id}> 
@@ -56,11 +46,8 @@ export default class AdminHome extends React.Component {
           </li>        
           )}
         </ul>
-
-
-
-    </div>     
-      </Router>   
+      </div>     
+    </Router>   
   );
   }
 }
