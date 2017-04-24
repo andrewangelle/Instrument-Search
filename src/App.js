@@ -13,19 +13,18 @@ import AdminEdit from './AdminEdit';
 
 const history = createHistory();
 
-export default class App extends React.Component {
-  render(){
+export default function App(props) {
 	return(
 	  <Router history={history} >
 	    <div>
-          <Switch>
-            <Route exact path="/" component={HomePage} />
-            <Route exact path="/search" component={InstrumentSearch} />
-            <Route exact path="/admin" component={AdminHome} />
-			<Route exact path="/admin/edit/:id" component={AdminEdit} />            
-          </Switch> 	
-		</div>     
-      </Router> 	
+        <Switch>
+          <Route exact path="/" component={HomePage} />
+          <Route exact path="/search" component={InstrumentSearch} />
+          <Route exact path="/admin" component={AdminHome} />
+          <Route exact path="/admin/edit/:name" component={AdminEdit} />           
+        </Switch> 
+		  </div>     
+    </Router> 	
 	);
-  }
+  
 }
