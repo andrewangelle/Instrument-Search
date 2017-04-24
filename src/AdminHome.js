@@ -34,7 +34,7 @@ export default class AdminHome extends React.Component {
         <ul>
           {this.state.instruments.map(instrument =>
             <li key={instrument.id}> 
-              <Link to="/admin/edit/">
+              <Link to={`/admin/edit/${instrument.id}`}>
                 <button>
                   {instrument.name}
                 </button>

@@ -1,45 +1,33 @@
-export default class AdminHome extends React.Component {
-  constructor(props){
-		super(props);
+import React from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 
-		this.state={
-			instruments: []
-		};
+const ParamsExample = () => (
+  <Router>
+    <div>
+      <Route path="/:id" component={Child}/>
+    </div>
+  </Router>
+)
 
-		this.updateResults = this.updateResults.bind(this);
+const Child = ({ match }) => (
+  <div>
+    <h3>ID: {match.params.id}</h3>
+  </div>
+)
 
-	}
-  updateResults(results) {
+export default ParamsExample
 
-    this.setState({instruments: results});
 
-  }
-  componentDidMount() {
 
-    fetch('api/search?')
-      .then(response => {
-        return response.json();
-      })
-      .then(results => {
-        this.updateResults(results);
-        console.log(results);
-      });
-  }
-
-	render(){
-		return(
-		  <div>
-        <ul>
-          {this.state.instruments.map(instrument =>
-          <li key={instrument.id}> 
-            <button>
-              {instrument.name}
-            </button>
-          </li>        
-        	)}
-      	</ul>
-			</div>
-		);
-	}
-}
-
+    <div>
+      <h2>Accounts</h2>
+      <ul>
+        <li><Link to="/netflix">Netflix</Link></li>
+        <li><Link to="/zillow-group">Zillow Group</Link></li>
+        <li><Link to="/yahoo">Yahoo</Link></li>
+        <li><Link to="/modus-create">Modus Create</Link></li>
+      </ul>

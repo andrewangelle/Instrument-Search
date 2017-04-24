@@ -1,11 +1,12 @@
 import React from 'react';
 
+//object spread
 export default class AdminEdit extends React.Component {
   constructor(props){
   	super(props);
 
   	  this.state={
-        currentInstrument:"",
+        currentInstrument:[],
       	allFamilies: [],
       	allClefs: [],
       	allSounds: [],
