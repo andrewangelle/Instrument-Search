@@ -5,6 +5,7 @@ export default class AdminEdit extends React.Component {
   	super(props);
 
   	  this.state={
+        currentInstrument:"",
       	allFamilies: [],
       	allClefs: [],
       	allSounds: [],
@@ -37,10 +38,10 @@ export default class AdminEdit extends React.Component {
   //var name = {match.params.id}
     fetch('/api/families')
       .then(response => {
-      	return response.json()
+        return response.json()
       })
       .then(results => {
-      	console.log(results);
+        console.log(results);
         this.updateFamilyDropdown(results);
       });
     fetch('/api/clefs')
@@ -67,7 +68,8 @@ export default class AdminEdit extends React.Component {
         console.log(results);
         this.updateTransposesDropdown(results);
     });              
-  }
+  }  
+
 
   render(){
   	return(
@@ -75,7 +77,7 @@ export default class AdminEdit extends React.Component {
           <form>
             <label>
               Name:
-              <input type="text"/> 
+              <input type="text" value=""/> 
             </label>
           <br />
           <br />

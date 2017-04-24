@@ -13,18 +13,18 @@ import AdminEdit from './AdminEdit';
 
 const history = createHistory();
 
-export default function App(props) {
-	return(
-	  <Router history={history} >
+const App = () => (
+	  <Router history={history} > 
 	    <div>
         <Switch>
           <Route exact path="/" component={HomePage} />
           <Route exact path="/search" component={InstrumentSearch} />
           <Route exact path="/admin" component={AdminHome} />
-          <Route exact path="/admin/edit/:name" component={AdminEdit} />           
+          <Route exact path="/admin/edit" component={AdminEdit} />           
         </Switch> 
 		  </div>     
     </Router> 	
-	);
-  
-}
+)
+
+export default App
+ 

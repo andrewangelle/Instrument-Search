@@ -25,9 +25,8 @@ export default class AdminHome extends React.Component {
         this.displayDataBaseEntries(results);
         console.log(results);
       });
-  }
 
-  class 
+  }
       
   render(){
     return(
@@ -35,7 +34,7 @@ export default class AdminHome extends React.Component {
         <ul>
           {this.state.instruments.map(instrument =>
             <li key={instrument.id}> 
-              <Link to="/admin/edit/:id">
+              <Link to="/admin/edit/">
                 <button>
                   {instrument.name}
                 </button>
