@@ -1,6 +1,14 @@
 import React from 'react';
 
-//object spread
+//Todo:
+//setup onChange handlers for form inputs
+//
+//"object spread" to setState on a single key/value nested inside
+//an object (currentInstrument)
+//
+//setup form's onSubmit to handle instrument update: fetch(/api/update)
+//
+//setup onClick to handle delete: fetch(/api/delete)   
 export default class AdminEdit extends React.Component {
   constructor(props){
   	super(props);
@@ -10,9 +18,15 @@ export default class AdminEdit extends React.Component {
       	allFamilies: [],
       	allClefs: [],
       	allSounds: [],
-      	allTransposes: []
+      	allTransposes: [],
+        name: "",
+        family: "",
+        clef: "",
+        sounds: "",
+        transposes: ""
     }
 
+    this.updateCurrentInstrument = this.updateCurrentInstrument.bind(this);
     this.updateTransposesDropdown = this.updateTransposesDropdown.bind(this);
     this.updateSoundsDropdown = this.updateSoundsDropdown.bind(this);
     this.updateFamilyDropdown = this.updateFamilyDropdown.bind(this);
@@ -29,20 +43,29 @@ export default class AdminEdit extends React.Component {
   }
   updateClefDropdown(results) {
     this.setState({allClefs: results});
+  }
+  updateCurrentInstrument(results) {
+    this.setState({currentInstrument: results})
   }  
 
   componentDidMount() { 
   // make fetch calls
   // convert responses to json
   // update the individual entries in rendered form with all possible options
-  
-  //var name = {match.params.id}
+  var id = this.props.match.params;
+
+    fetch(`/api/search?id=${id}`)
+      .then(response => {
+        return response.json()
+      })
+      .then(results => {
+        this.updateCurrentInstrument(results);
+      });
     fetch('/api/families')
       .then(response => {
         return response.json()
       })
       .then(results => {
-        console.log(results);
         this.updateFamilyDropdown(results);
       });
     fetch('/api/clefs')
@@ -50,7 +73,6 @@ export default class AdminEdit extends React.Component {
         return response.json()
     })
       .then(results => {
-        console.log(results);
         this.updateClefDropdown(results);
     });
     fetch('/api/sounds')
@@ -58,7 +80,6 @@ export default class AdminEdit extends React.Component {
         return response.json()
     })
       .then(results => {
-        console.log(results);
         this.updateSoundsDropdown(results);
     });
     fetch('/api/transposes')
@@ -66,28 +87,26 @@ export default class AdminEdit extends React.Component {
         return response.json()
     })
       .then(results => {
-        console.log(results);
         this.updateTransposesDropdown(results);
-    });              
+    });             
   }  
-
 
   render(){
   	return(
-  	  <div> 
+  	  <div>
           <form>
             <label>
               Name:
-              <input type="text" value=""/> 
+              <input type="text"/> 
             </label>
           <br />
           <br />
             <label>
               Family:
-              <select type="dropdown" value="placeholder">
-                <option value="placeholder"></option>               
-                {this.state.allFamilies.map(oneFamily => 
-                <option>{oneFamily}</option>
+              <select type="dropdown" value={this.state.family}>
+                <option></option>               
+                {this.state.allFamilies.map(singleFamily => 
+                <option>{singleFamily}</option>
                 )}               
               </select>
             </label>
@@ -95,10 +114,10 @@ export default class AdminEdit extends React.Component {
           <br />
             <label>
               Clef:
-              <select type="dropdown" value="placeholder">
-                <option value="placeholder"></option>              
-                {this.state.allClefs.map(oneClef => 
-                <option>{oneClef}</option>
+              <select type="dropdown" value={this.state.clef}>
+                <option></option>              
+                {this.state.allClefs.map(singleClef => 
+                <option>{singleClef}</option>
                 )}
               </select>  
             </label>
@@ -106,10 +125,10 @@ export default class AdminEdit extends React.Component {
           <br />
             <label>
               Sounds:
-              <select type="dropdown" value="placeholder">
+              <select type="dropdown" value={this.state.sounds}>
                 <option value="placeholder"></option>              
-                {this.state.allSounds.map(oneSound => 
-                <option>{oneSound}</option>
+                {this.state.allSounds.map(singleSound => 
+                <option>{singleSound}</option>
                 )}                
               </select>
             </label>
@@ -117,16 +136,21 @@ export default class AdminEdit extends React.Component {
           <br />
             <label>
               Transposes:
-              <select type="dropdown" value="placeholder">
+              <select type="dropdown" value={this.state.transposes}>
                 <option value="placeholder"></option>              
-                {this.state.allTransposes.map(oneTranspose => 
-                <option>{oneTranspose}</option>
+                {this.state.allTransposes.map(singleTranspose => 
+                <option>{singleTranspose}</option>
                 )}               
               </select>
             </label>
           <br />
           <br />
-            <input type="submit" value="Save Changes" />
+            <label>
+              ID: will be hidden..
+              <input type="text" value="" />
+            </label>
+          <br />  
+          <input type="submit" value="Save Changes" />
         </form>
 
         <button>Delete Instrument</button>

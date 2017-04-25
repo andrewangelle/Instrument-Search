@@ -5,7 +5,6 @@ import {
   Switch 
 } from 'react-router-dom'
 import createHistory from 'history/createBrowserHistory';
-import HomePage from './HomePage';
 import InstrumentSearch from './InstrumentSearch';
 import AdminHome from './AdminHome';
 import AdminEdit from './AdminEdit';
