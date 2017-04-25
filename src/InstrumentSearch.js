@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-
+//incorporate qs library in handleSubmite function
 export default class InstrumentSearch extends React.Component {
 
   constructor(props) {
