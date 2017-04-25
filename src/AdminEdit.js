@@ -1,17 +1,12 @@
 import React from 'react';
 
 //---------
-//Todo: 4/24
+//Todo: 4/25
 //---------
-//  setup onChange handlers for form inputs
 //
-//  need to map order of events for updating the state of currentInstrument
-//    look up "object spread" to setState on a single key/value pair nested inside
-//    an object (currentInstrument)
+//  program form's onSubmit to handle instrument update: fetch(/api/update)
 //
-//  setup form's onSubmit to handle instrument update: fetch(/api/update)
-//
-//  setup onClick to handle delete: fetch(/api/delete) 
+//  progrfam onClick to handle delete: fetch(/api/delete) 
 //------------
 
 export default class AdminEdit extends React.Component {
@@ -87,7 +82,7 @@ export default class AdminEdit extends React.Component {
     })
   }
 
-    handleTransposesChange(event) {
+  handleTransposesChange(event) {
     this.setState({
       currentInstrument: {
         ...this.state.currentInstrument,
@@ -96,12 +91,20 @@ export default class AdminEdit extends React.Component {
     })
   }
 
+  saveChanges(event) {
+
+  }
+
+  deleteInstrument(event) {
+
+  }
+
   componentDidMount() { 
   // make fetch calls
   // convert responses to json
   // update the individual entries in rendered form with all possible options
-  var id = this.props.match.params.id;
-  console.log (id)
+  
+    var id = this.props.match.params.id;
 
     fetch(`/api/search?id=${id}`)
       .then(response => {
@@ -109,8 +112,9 @@ export default class AdminEdit extends React.Component {
       })
       .then(results => {
         console.log(results);
-        this.updateCurrentInstrument(results);
+        this.updateCurrentInstrument(results[0]);
       });
+
     fetch('/api/families')
       .then(response => {
         return response.json()
@@ -118,39 +122,43 @@ export default class AdminEdit extends React.Component {
       .then(results => {
         this.updateFamilyDropdown(results);
       });
+
     fetch('/api/clefs')
       .then(response => {
         return response.json()
-    })
+      })
       .then(results => {
         this.updateClefDropdown(results);
-    });
+      });
+
     fetch('/api/sounds')
       .then(response => {
         return response.json()
-    })
+      })
       .then(results => {
         this.updateSoundsDropdown(results);
-    });
+      });
+      
     fetch('/api/transposes')
       .then(response => {
         return response.json()
-    })
+      })
       .then(results => {
         this.updateTransposesDropdown(results);
-    });             
+      });             
   }  
 
   render(){
+    console.log(this.state.currentInstrument.name)
   	return(
   	  <div>
-          <form>
+          <form onSubmit={this.saveChanges.bind(this)}>
             <label>
               Name:
               <input type="text"
                      value={this.state.currentInstrument.name}
                      onChange={this.handleNameChange.bind(this)} 
-                     /> 
+                     />
             </label>
               <br />
               <br />
@@ -180,7 +188,6 @@ export default class AdminEdit extends React.Component {
             </label>
               <br />
               <br />
-
             <label>
               Sounds:
               <select type="dropdown"
@@ -194,7 +201,6 @@ export default class AdminEdit extends React.Component {
             </label>
               <br />
               <br />
-
             <label>
               Transposes:
               <select type="dropdown"
@@ -206,15 +212,15 @@ export default class AdminEdit extends React.Component {
                 )}               
               </select>
             </label>
-
               <br />
             <input type="submit"
                    value="Save Changes" 
                    />
           </form>
-        <button>Delete Instrument</button>
+        <button onClick={this.deleteInstrument.bind(this)}
+          >Delete Instrument
+        </button>
       </div>  
-  		);
+  	);
   }
-
 }
