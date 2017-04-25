@@ -19,20 +19,14 @@ export default class AdminEdit extends React.Component {
   	super(props);
 
   	  this.state={
-        currentInstrument:[],
+        currentInstrument:{},
       	allFamilies: [],
       	allClefs: [],
       	allSounds: [],
       	allTransposes: [],
-        name: "",
-        family: "",
-        clef: "",
-        sounds: "",
-        transposes: "",
-        id:""
     }
 
-    this.updateId = this.updateId.bind(this);
+    
     this.updateCurrentInstrument = this.updateCurrentInstrument.bind(this);
     this.updateTransposesDropdown = this.updateTransposesDropdown.bind(this);
     this.updateSoundsDropdown = this.updateSoundsDropdown.bind(this);
@@ -40,8 +34,8 @@ export default class AdminEdit extends React.Component {
     this.updateClefDropdown = this.updateClefDropdown.bind(this);  
   }
 
-  updateId(results) {
-    this.setState({id: results})
+  updateCurrentInstrument(results) {
+    this.setState({currentInstrument: results});
   }
   updateTransposesDropdown(results){
     this.setState({allTransposes: results});
@@ -55,12 +49,51 @@ export default class AdminEdit extends React.Component {
   updateClefDropdown(results) {
     this.setState({allClefs: results});
   }
-  updateCurrentInstrument(results) {
-    this.setState({currentInstrument: results})
-  } 
 
-  handleChange(event) {
-    this.setState({id: event.target.value})
+
+  handleNameChange(event) {
+    this.setState({
+      currentInstrument: {
+        ...this.state.currentInstrument,
+        name: event.target.value
+      }
+    })
+  }
+
+  handleFamilyChange(event) {
+    this.setState({
+      currentInstrument: {
+        ...this.state.currentInstrument,
+        family: event.target.value
+      }
+    })
+  }
+
+  handleClefChange(event) {
+    this.setState({
+      currentInstrument: {
+        ...this.state.currentInstrument,
+        clef: event.target.value
+      }
+    })
+  }
+
+  handleSoundsChange(event) {
+    this.setState({
+      currentInstrument: {
+        ...this.state.currentInstrument,
+        sounds: event.target.value
+      }
+    })
+  }
+
+    handleTransposesChange(event) {
+    this.setState({
+      currentInstrument: {
+        ...this.state.currentInstrument,
+        transposes: event.target.value
+      }
+    })
   }
 
   componentDidMount() { 
@@ -76,7 +109,7 @@ export default class AdminEdit extends React.Component {
       })
       .then(results => {
         console.log(results);
-        this.updateId(results);
+        this.updateCurrentInstrument(results);
       });
     fetch('/api/families')
       .then(response => {
@@ -114,66 +147,72 @@ export default class AdminEdit extends React.Component {
           <form>
             <label>
               Name:
-              <input type="text"/> 
+              <input type="text"
+                     value={this.state.currentInstrument.name}
+                     onChange={this.handleNameChange.bind(this)} 
+                     /> 
             </label>
-          <br />
-          <br />
+              <br />
+              <br />
             <label>
               Family:
-              <select type="dropdown" value={this.state.family}>
-                <option></option>               
+              <select type="dropdown"
+                      value={this.state.currentInstrument.family}
+                      onChange={this.handleFamilyChange.bind(this)}
+                      >               
                 {this.state.allFamilies.map(singleFamily => 
-                <option >{singleFamily}</option>
+                <option key={singleFamily}>{singleFamily}</option>
                 )}               
               </select>
             </label>
-          <br />
-          <br />
+              <br />
+              <br />
             <label>
               Clef:
-              <select type="dropdown" value={this.state.clef}>
-                <option></option>              
+              <select type="dropdown" 
+                      value={this.state.currentInstrument.clef}
+                      onChange={this.handleClefChange.bind(this)}
+                      >            
                 {this.state.allClefs.map(singleClef => 
-                <option >{singleClef}</option>
+                <option key={singleClef}>{singleClef}</option>
                 )}
               </select>  
             </label>
-          <br />
-          <br />
+              <br />
+              <br />
+
             <label>
               Sounds:
-              <select type="dropdown" value={this.state.sounds}>
-                <option></option>              
+              <select type="dropdown"
+                      value={this.state.currentInstrument.sounds}
+                      onChange={this.handleSoundsChange.bind(this)}
+                      >            
                 {this.state.allSounds.map(singleSound => 
-                <option>{singleSound}</option>
+                <option key={singleSound}>{singleSound}</option>
                 )}                
               </select>
             </label>
-          <br />
-          <br />
+              <br />
+              <br />
+
             <label>
               Transposes:
-              <select type="dropdown" value={this.state.transposes}>
-                <option></option>              
+              <select type="dropdown"
+                      value={this.state.currentInstrument.transposes}
+                      onChange={this.handleTransposesChange.bind(this)}
+                      >             
                 {this.state.allTransposes.map(singleTranspose => 
-                <option key={this.props.children}>{singleTranspose}</option>
+                <option key={singleTranspose}>{singleTranspose}</option>
                 )}               
               </select>
             </label>
-          <br />
-          <br />
-            <label>
-              ID: will be hidden..
-              <input type="text" value={this.state.id} />
-            </label>
-          <br />  
-          <input type="submit" value="Save Changes" onChange={this.handleChange.bind(this)} />
-        </form>
 
+              <br />
+            <input type="submit"
+                   value="Save Changes" 
+                   />
+          </form>
         <button>Delete Instrument</button>
-        <hr />
-
-        <h4>{this.state.currentInstrument}</h4>
       </div>  
   		);
   }
