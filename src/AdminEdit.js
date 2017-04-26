@@ -92,7 +92,17 @@ export default class AdminEdit extends React.Component {
   }
 
   saveChanges(event) {
+    var id = this.props.match.params.id;
+    var name = this.state.currentInstrument.name;
+    var family = this.state.currentInstrument.family;
+    var clef = this.state.currentInstrument.clef;
+    var sounds = this.state.currentInstrument.sounds;
+    var transposes = this.state.currentInstrument.transposes; 
 
+    fetch(`/api/instrument/update?id=${id}&name=${name}&family=${family}&clef=${clef}&sounds=${sounds}&transposes=${transposes}`)
+      .then(function() {
+        console.log('updated');
+      });
   }
 
   deleteInstrument(event) {
