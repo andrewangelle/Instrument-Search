@@ -105,6 +105,12 @@ export default class AdminEdit extends React.Component {
   }
 
   deleteInstrument(event) {
+    var id = this.props.match.params.id;
+    
+    fetch(`/api/instrument/delete/?id=${id}`)
+      .then( () => {
+        console.log('deleted');
+      });
 
   }
 
