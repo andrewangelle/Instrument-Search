@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
 
-//incorporate qs library in handleSubmite function
+
+//------------------------
+//  To Do:
+//-----------------------
+//
+//    -incorporate QS lib for query string parameters
+//
+//------------------------
+
+
 export default class InstrumentSearch extends React.Component {
 
   constructor(props) {
@@ -31,11 +40,7 @@ export default class InstrumentSearch extends React.Component {
   handleClefChange(event) {
     this.setState({clef: event.target.value});
   }
-
-
-
   handleSubmit(event) {
-
     event.preventDefault();
 
     var name = this.state.name;
@@ -77,7 +82,6 @@ export default class InstrumentSearch extends React.Component {
     });
 
   }
-
   render() {
     return (
      <div> 
@@ -114,15 +118,14 @@ export default class InstrumentSearch extends React.Component {
         <br />
         <input type="submit" value="Submit" />
       </form>
-
-      <ul>
-        {this.state.instruments.map(instrument =>
-          <li key={instrument.id}> 
+      
+        <ul>
+          {this.state.instruments.map(instrument =>
+            <li key={instrument.id}> 
               <button>{instrument.name}</button>
-          </li>        
-        )}
-      </ul>
-
+            </li>        
+          )}
+        </ul>
     </div>
     );
   }

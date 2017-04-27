@@ -1,7 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-//move Header to App level
+//-------------
+//  To Do:
+//-------------
+//
+//    -after designing, move header to App leve
+//
+//-----------------
 export default class Header extends React.Component {
 	render() {
 	  return (

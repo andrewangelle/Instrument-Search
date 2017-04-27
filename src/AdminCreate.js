@@ -1,7 +1,12 @@
 import React from 'react';
 
-//look up solution to solve navigating user back to /admin 
-//after [create,save,delete] instrument action in /admin/edit/:id
+//-------------
+//	To Do:
+//-------------
+//
+//	  -default values of dropsdowns needs to be blank not undefined
+//
+//-----------------
 
 export default class AdminCreate extends React.Component {
   constructor(props){

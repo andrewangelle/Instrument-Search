@@ -1,10 +1,14 @@
 import React from 'react';
 
-//---------
-//Todo: 4/25
-//---------
-//  program onClick to handle delete: fetch(/api/delete) 
-//------------
+//-------------
+//  To Do:
+//-------------
+//
+//    -user needs to be navigated back to /admin after editing
+//     or deleting instrument
+//
+//-----------------
+
 
 export default class AdminEdit extends React.Component {
   constructor(props){
@@ -106,28 +110,11 @@ export default class AdminEdit extends React.Component {
 
   deleteInstrument(event) {
     var id = this.props.match.params.id;
-    
+
     fetch(`/api/instrument/delete/?id=${id}`)
       .then( () => {
         console.log('deleted');
       });
-
-  }
-
-  createNewInstrument(event) {
-    var name = this.state.currentInstrument.name;
-    var family = this.state.currentInstrument.family;
-    var clef = this.state.currentInstrument.clef;
-    var sounds = this.state.currentInstrument.sounds;
-    var transposes = this.state.currentInstrument.transposes; 
-
-    event.preventDefault();
-
-
-  fetch(`/api/instrument/create?name=${name}&family=${family}&clef=${clef}&sounds=${sounds}&transposes=${transposes}`)
-      .then( () => {
-      console.log("instrument created")
-     });
 
   }
 
@@ -251,10 +238,7 @@ export default class AdminEdit extends React.Component {
           </form>
         <button onClick={this.deleteInstrument.bind(this)}
           >Delete Instrument
-        </button><br/>
-        <button onClick={this.createNewInstrument.bind(this)}
-          >Create New Instrument
-        </button>        
+        </button>       
       </div>  
   	);
   }
