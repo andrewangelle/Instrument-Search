@@ -113,19 +113,19 @@ router.get('/transposes', function(req,res){
     });
 });
 
-router.get('/instrument/update', function(req,res){
+router.post('/instrument/update', function(req,res){
   var dbQuery = 'update instruments set';
 
-  var values = Object.keys(req.query)
+  var values = Object.keys(req.body)
     .filter(function(key) {
       return key !== 'id';
     })
     .map(function(key) {
-      var value = req.query[key];
+      var value = req.body[key];
       return `${key} = '${value}'`;
     }).join(', ');
 
-  dbQuery = `${dbQuery} ${values} where id = '${req.query.id}'`;
+  dbQuery = `${dbQuery} ${values} where id = '${req.body.id}'`;
 
   pool.connect()
     .then(function(client){
