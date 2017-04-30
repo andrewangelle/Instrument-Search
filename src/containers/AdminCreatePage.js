@@ -1,108 +1,37 @@
 import React from 'react';
+import AdminCreateForm from './AdminCreateForm';
 
 //-------------
 //	To Do:
 //-------------
 //
-//	  -default values of dropsdowns needs to be blank not undefined
+//	  -default values of dropsdowns needs to be set to blank
 //
 //-----------------
 
-export default class AdminCreate extends React.Component {
+export default class AdminCreatePage extends React.Component {
   constructor(props){
   	super(props);
 
   	  this.state={
-        currentInstrument:{},
-      	allFamilies: [],
-      	allClefs: [],
-      	allSounds: [],
-      	allTransposes: [],
+      	families: [],
+      	clefs: [],
+      	sounds: [],
+      	transposes: [],
     }
 
-    
-    
-    this.updateTransposesDropdown = this.updateTransposesDropdown.bind(this);
-    this.updateSoundsDropdown = this.updateSoundsDropdown.bind(this);
-    this.updateFamilyDropdown = this.updateFamilyDropdown.bind(this);
-    this.updateClefDropdown = this.updateClefDropdown.bind(this);  
-  }
 
-
-  updateTransposesDropdown(results){
-    this.setState({allTransposes: results});
-  }
-  updateSoundsDropdown(results) {
-    this.setState({allSounds: results});
-  }
-  updateFamilyDropdown(results) {
-  	this.setState({allFamilies: results});
-  }
-  updateClefDropdown(results) {
-    this.setState({allClefs: results});
-  }
-
-
-  handleNameChange(event) {
-    this.setState({
-      currentInstrument: {
-        ...this.state.currentInstrument,
-        name: event.target.value
-      }
+  createNewInstrument(instrument) {
+    fetch('/api/instrument/create', {
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      method: 'PUT',
+      body: JSON.stringify(instrument)
     })
-  }
-
-  handleFamilyChange(event) {
-    this.setState({
-      currentInstrument: {
-        ...this.state.currentInstrument,
-        family: event.target.value
-      }
-    })
-  }
-
-  handleClefChange(event) {
-    this.setState({
-      currentInstrument: {
-        ...this.state.currentInstrument,
-        clef: event.target.value
-      }
-    })
-  }
-
-  handleSoundsChange(event) {
-    this.setState({
-      currentInstrument: {
-        ...this.state.currentInstrument,
-        sounds: event.target.value
-      }
-    })
-  }
-
-  handleTransposesChange(event) {
-    this.setState({
-      currentInstrument: {
-        ...this.state.currentInstrument,
-        transposes: event.target.value
-      }
-    })
-  }
-
-  createNewInstrument(event) {
-    var name = this.state.currentInstrument.name;
-    var family = this.state.currentInstrument.family;
-    var clef = this.state.currentInstrument.clef;
-    var sounds = this.state.currentInstrument.sounds;
-    var transposes = this.state.currentInstrument.transposes; 
-
-    event.preventDefault();
-
-
-  fetch(`/api/instrument/create?name=${name}&family=${family}&clef=${clef}&sounds=${sounds}&transposes=${transposes}`)
-      .then( () => {
-      console.log("instrument created")
-     });
-
+    .then(function() {
+      console.log('updated');
+    });
   }
 
   componentDidMount() { 
@@ -115,23 +44,27 @@ export default class AdminCreate extends React.Component {
         return response.json()
       })
       .then(results => {
-        this.updateFamilyDropdown(results);
+        this.setState({
+          families: results
+        });
       });
 
     fetch('/api/clefs')
       .then(response => {
         return response.json()
       })
-      .then(results => {
-        this.updateClefDropdown(results);
-      });
+        this.setState({
+          clefs: results
+        });
 
     fetch('/api/sounds')
       .then(response => {
         return response.json()
       })
       .then(results => {
-        this.updateSoundsDropdown(results);
+        this.setState({
+          sounds: results
+        });
       });
       
     fetch('/api/transposes')
@@ -139,79 +72,25 @@ export default class AdminCreate extends React.Component {
         return response.json()
       })
       .then(results => {
-        this.updateTransposesDropdown(results);
+        this.setState({
+          transposes: results
+        });
       });             
   }  
 
   render(){
   	return(
-  	  <div>
-          <form onSubmit={this.createNewInstrument.bind(this)}>
-            <label>
-              Name:
-              <input type="text"
-                     value={this.state.currentInstrument.name}
-                     onChange={this.handleNameChange.bind(this)} 
-                     />
-            </label>
-              <br />
-              <br />
-            <label>
-              Family:
-              <select type="dropdown"
-                      value={this.state.currentInstrument.family}
-                      onChange={this.handleFamilyChange.bind(this)}
-                      >               
-                {this.state.allFamilies.map(singleFamily => 
-                <option key={singleFamily}>{singleFamily}</option>
-                )}               
-              </select>
-            </label>
-              <br />
-              <br />
-            <label>
-              Clef:
-              <select type="dropdown" 
-                      value={this.state.currentInstrument.clef}
-                      onChange={this.handleClefChange.bind(this)}
-                      >            
-                {this.state.allClefs.map(singleClef => 
-                <option key={singleClef}>{singleClef}</option>
-                )}
-              </select>  
-            </label>
-              <br />
-              <br />
-            <label>
-              Sounds:
-              <select type="dropdown"
-                      value={this.state.currentInstrument.sounds}
-                      onChange={this.handleSoundsChange.bind(this)}
-                      >            
-                {this.state.allSounds.map(singleSound => 
-                <option key={singleSound}>{singleSound}</option>
-                )}                
-              </select>
-            </label>
-              <br />
-              <br />
-            <label>
-              Transposes:
-              <select type="dropdown"
-                      value={this.state.currentInstrument.transposes}
-                      onChange={this.handleTransposesChange.bind(this)}
-                      >             
-                {this.state.allTransposes.map(singleTranspose => 
-                <option key={singleTranspose}>{singleTranspose}</option>
-                )}               
-              </select>
-            </label>
-              <br />
-            <input type="submit"
-                   value="Create New Instrument" 
-                   />
-          </form>       
-      </div>  
+      <div>
+        <AdminCreateForm
+          instrument={this.state.instrument}
+          families={this.state.families}
+          clefs={this.state.clefs}
+          sounds={this.state.sounds}
+          transposes={this.state.transposes}
+          updateInstrument={this.updateInstrument}
+          deleteInstrument={this.deleteInstrument} 
+        />
+      </div>
   	);
   }
 }
