@@ -1,11 +1,11 @@
 import React from 'react';
-import AdminCreateForm from './AdminCreateForm';
+import AdminCreateForm from '../components/AdminCreateForm'
 
 //-------------
 //	To Do:
 //-------------
 //
-//	  -default values of dropsdowns needs to be set to blank
+//	  -if logic to render "..Loading until dropdowns populate"
 //
 //-----------------
 
@@ -14,24 +14,18 @@ export default class AdminCreatePage extends React.Component {
   	super(props);
 
   	  this.state={
+        newInstrument: {},
       	families: [],
       	clefs: [],
       	sounds: [],
-      	transposes: [],
+      	transposes: []
     }
-
+}
 
   createNewInstrument(instrument) {
-    fetch('/api/instrument/create', {
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      method: 'PUT',
-      body: JSON.stringify(instrument)
+    this.setState({
+      newInstrument: instrument 
     })
-    .then(function() {
-      console.log('updated');
-    });
   }
 
   componentDidMount() { 
@@ -53,9 +47,11 @@ export default class AdminCreatePage extends React.Component {
       .then(response => {
         return response.json()
       })
+      .then(results => {
         this.setState({
           clefs: results
         });
+      });
 
     fetch('/api/sounds')
       .then(response => {

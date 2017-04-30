@@ -47,7 +47,8 @@ export default class AdminCreateForm extends React.Component {
                       name="family"
                       value={this.state.instrument.family}
                       onChange={this.handleChange.bind(this)}
-                      >               
+                      >
+                <option></option>
                 {this.props.families.map(family => 
                 <option key={family}>{family}</option>
                 )}               
@@ -61,7 +62,8 @@ export default class AdminCreateForm extends React.Component {
                       name="clef"
                       value={this.state.instrument.clef}
                       onChange={this.handleChange.bind(this)}
-                      >            
+                      >
+                <option></option>      
                 {this.props.clefs.map(clef => 
                 <option key={clef}>{clef}</option>
                 )}
@@ -75,7 +77,8 @@ export default class AdminCreateForm extends React.Component {
                       name="sounds"
                       value={this.state.instrument.sounds}
                       onChange={this.handleChange.bind(this)}
-                      >            
+                      >
+                <option></option>
                 {this.props.sounds.map(sound => 
                 <option key={sound}>{sound}</option>
                 )}                
@@ -89,7 +92,8 @@ export default class AdminCreateForm extends React.Component {
                       name="transposes"
                       value={this.state.instrument.transposes}
                       onChange={this.handleChange.bind(this)}
-                      >             
+                      >
+                <option></option>
                 {this.props.transposes.map(transpose => 
                 <option key={transpose}>{transpose}</option>
                 )}               
