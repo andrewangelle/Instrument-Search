@@ -41,7 +41,6 @@ router.get('/search', function(req,res) {
       dbQuery = `${dbQuery} and ${key} = '${value}'`;
     }
   }
-
   pool.connect()
     .then(function(client) {
       client.release();

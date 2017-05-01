@@ -19,19 +19,27 @@ export default class InstrumentSearchPage extends React.Component {
     super(props);
 
     this.state = {
-      form: props.form,
       families:[],
       clefs:[],
-      searchResults:[]
+      searchQuery: {},
+      searchResults:{}
+
     };
   }
-  getInstrumentSearchResults() {
-    var form=this.state.form;
+  getInstrumentSearchResults(form) {
+    const queryString = require('query-string');
+    var url = `?${queryString.stringify(form)}`
 
-    console.log(`${form}`)
+    fetch('api/search'+url)
+    .then(response => { 
+      return response.json();
+    })
+    .then(results => {
+      console.log(results[0]);
+    });
   }
 
-  componentDidMount(){
+  componentDidMount() {
     fetch('/api/families')
       .then(response => {
         return response.json()
@@ -61,15 +69,6 @@ export default class InstrumentSearchPage extends React.Component {
           getInstrumentSearchResults={this.getInstrumentSearchResults}
         />
         <hr />
-          <div>
-            <ul>
-            {this.state.searchResults.map(instrument =>
-              <li key={instrument.id}> 
-                <button>{instrument.name}</button>
-              </li>        
-            )}
-          </ul>        
-        </div>  
       </div>  
     );
   }
