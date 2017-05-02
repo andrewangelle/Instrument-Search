@@ -13,9 +13,9 @@ export default class InstrumentSearchPage extends React.Component {
     };
   }
 
-//fire when user submits form
-//then fetch search results from database
-//then store in this.state
+//fire getInstrumentSearchResults when user submits form
+//then fetch results from database
+//then update state
   updateSearchResults(results) {
     this.setState({searchQuery: results});
   }
@@ -27,11 +27,9 @@ export default class InstrumentSearchPage extends React.Component {
         return response.json();
       })
       .then(results => {
-        this.updateSearchResults;
+        this.updateSearchResults(results);
         console.log(results);
       });
-
-
   }
 
 //Fetch from database 
