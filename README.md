@@ -1,32 +1,39 @@
 # Instrument-Search
 
-## Introduction
-
   A single page web application built with React, Node, and PostgreSQL. 
 
-  Checkout a live demo of the app's main search feature:
+## Introduction
 
+  Checkout a live demo of the app's main search feature:
   https://orchestral-instrument-database.herokuapp.com
 
 ## Description
 
-  The app will meet two projected needs of a user...
+  1. Get information about a single instrument.
+  Searching...
 
-  1. Information on a single instrument
+      Name: Trumpet
+      Family:
+      Clef:
+
+  ...will yield Trumpet's unique traits.
+     
+      family: Brass
+      pitch: B-flat
+      sounds at: M2 lower ..(relative to concert pitch)
+      transposes: M2 higher ..(to match concert pitch)
+      reads Treble Clef 
+
   
-  2. Information about a group of instruments
+  2. Get information about a group of instruments
+  Searching...
 
-    Example 1 
-      Searching 'Name: Trumpet' will yield...
+      Name: 
+      Family: Strings
+      Clef:
 
-      Family: Brass
-      Pitch: B-flat
-      Sounds at: M2 lower ..(relative to concert pitch)
-      Transposes: M2 higher ..(to match concert pitch)
-      Reads Treble Clef
-
-    Example 2 
-      Searching 'Family: Strings' will yield...
+  will yield all instruments that are a part of the strings family
+  ,along with each instrument's unique traits.
 
       Harpsichord
       Violin
@@ -35,25 +42,28 @@
       Harp
       Double Bass
       Guitar
- 	
- 	Example 3
-      Searching 'Family: Strings' and'Clef: Treble' will yield...
+  
+  Likewise, searching by multiple fields...
+
+      Name: 
+      Family: Strings
+      Clef: Treble
+
+  will yield the instruments that are a part of the strings family and also read treble clef.
 
       Violin
-      Guitar 
-
-
+      Guitar
 
 ## Technologies Used
  
-    React.js
+  React.js
       Main Search UI
       Admin UI for database maintenance
 
-    Node.js/Express.js:
+  Node.js/Express.js
       Server and API
 
-    PostgreSQL:
+  PostgreSQL
       Database
 
 

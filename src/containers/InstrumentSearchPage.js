@@ -1,44 +1,42 @@
 import React from 'react';
 import InstrumentSearchForm from '../components/InstrumentSearchForm';
 
-//------------------------
-//  To Do:
-//-----------------------
-//
-//    -incorporate QS lib for query string parameters
-//
-//    -make Results its own component
-//    -resolve QSparams....again
-//
-//------------------------
-
 
 export default class InstrumentSearchPage extends React.Component {
-
   constructor(props) {
     super(props);
-
     this.state = {
       families:[],
       clefs:[],
       searchQuery: {},
       searchResults:{}
-
     };
   }
-  getInstrumentSearchResults(form) {
-    const queryString = require('query-string');
-    var url = `?${queryString.stringify(form)}`
 
+//fire when user submits form
+//then fetch search results from database
+//then store in this.state
+  updateSearchResults(results) {
+    this.setState({searchQuery: results});
+  }
+  getInstrumentSearchResults(form) {
+    const construct = require('qs-hash');
+    var url = `?${construct.qsString(form, 'noencode')}`;
     fetch('api/search'+url)
-    .then(response => { 
-      return response.json();
-    })
-    .then(results => {
-      console.log(results[0]);
-    });
+      .then(response => { 
+        return response.json();
+      })
+      .then(results => {
+        this.updateSearchResults;
+        console.log(results);
+      });
+
+
   }
 
+//Fetch from database 
+//all potential values 
+//then store in this.state 
   componentDidMount() {
     fetch('/api/families')
       .then(response => {
@@ -49,7 +47,6 @@ export default class InstrumentSearchPage extends React.Component {
           families: results
         });
       });
-
     fetch('/api/clefs')
       .then(response => {
         return response.json()
@@ -60,6 +57,7 @@ export default class InstrumentSearchPage extends React.Component {
         });
       });    
   }
+
   render() {
     return(
       <div>
