@@ -9,56 +9,59 @@
 
 ## Description
 
-1. Get information about a single instrument. For example, searching for..
+1. Get information about a single instrument.  
+For example, searching for by name will yield Trumpet's unique traits.
 
-      Name: Trumpet
-      Family:
-      Clef:
-
-..will yield Trumpet's unique traits.
+        Name: Trumpet  
+        Family:  
+        Clef:    
+  
+       ..will result in:
      
-      family: Brass
-      pitch: B-flat
-      sounds at: M2 lower ..(relative to concert pitch)
-      transposes: M2 higher ..(to match concert pitch)
-      reads Treble Clef 
+        family: Brass
+        pitch: B-flat
+        sounds at: M2 lower ..(relative to concert pitch)
+        transposes: M2 higher ..(to match concert pitch)
+        reads Treble Clef 
 
   
-2. Get information about a group of instruments.
+2. Get information about a group of instruments.  
 
-      Name: 
-      Family: Strings
-      Clef:
+        Name: 
+        Family: Strings
+        Clef:
 
-will yield all instruments that are a part of the strings family. --along with the instrument's name, each instrument's unique traits will be displayed also.
+        ..will result in:
 
-      Harpsichord
-      Violin
-      Cello
-      Viola
-      Harp
-      Double Bass
-      Guitar
+        Harpsichord
+        Violin
+        Cello
+        Viola
+        Harp
+        Double Bass
+        Guitar  
+
+The list includes all instruments that are a part of the strings family. --along with the instrument's name, each instrument's unique traits will also be displayed.--  
   
-Likewise, searching by multiple fields..  
+3. Likewise, searching by multiple fields will yield the instruments that meet both criteria.  
 
-      Name: 
-      Family: Strings
-      Clef: Treble  
+        Name: 
+        Family: Strings
+        Clef: Treble  
 
-..will yield the instruments that are a part of the strings family and also read treble clef.  
+        ..will result in:
 
-      Violin
-      Guitar
+        Violin
+        Guitar
 
 ## Technologies Used
  
-1. React.js
-      *Main Search UI  
-      *Admin UI
+1. React.js  
+        *Main Search UI  
+        *Admin UI  
 
-2. Node.js
-      *Used Node along with Express.js to write a simple server, and a straight forward API to support client side requests with endpoints as follows... 
+2. Node.js  
+        *Used Node along with Express.js to write a simple server, and a straight forward API to support client side requests with endpoints as follows... 
       *  
 ```javascript
 //single endpoint for all search requests.
@@ -76,7 +79,7 @@ router.post('/instrument/update', (req,res) =>{})
 router.put('/instrument/create', (req,res) =>{})
 router.delete('/instrument/delete', (req,res) =>{})
 ```
-3. PostgreSQL
+3. PostgreSQL  
       Database
 
 
