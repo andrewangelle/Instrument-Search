@@ -3,12 +3,10 @@ import React from 'react';
 export default class InstrumentSearchForm extends React.Component {
   constructor(props){
     super(props);
-
     this.state = {
       form: {}
     }
   }
-  
   handleChange(event) {
     this.setState({
       form: {
@@ -17,8 +15,6 @@ export default class InstrumentSearchForm extends React.Component {
       }
     })
   }
-
-
   render() {
     return (
      <div> 
@@ -42,7 +38,7 @@ export default class InstrumentSearchForm extends React.Component {
           		  name="family"
           		  value={this.state.form.family}
           		  onChange={this.handleChange.bind(this)}
-          		>
+                >
             <option></option>
             {this.props.families.map(family =>
             <option key={family}>{family}</option>
@@ -57,7 +53,7 @@ export default class InstrumentSearchForm extends React.Component {
           		  name="clef"
           		  value={this.state.form.clef}
           		  onChange={this.handleChange.bind(this)}
-          		>
+          		  >
             <option></option>  
             {this.props.clefs.map(clef =>
             <option key={clef}>{clef}</option>
@@ -71,5 +67,4 @@ export default class InstrumentSearchForm extends React.Component {
     </div>
     );
   }
-
 }

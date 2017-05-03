@@ -9,14 +9,13 @@
 
 ## Description
 
-  1. Get information about a single instrument.
-  Searching...
+1. Get information about a single instrument. For example, searching for..
 
       Name: Trumpet
       Family:
       Clef:
 
-  ...will yield Trumpet's unique traits.
+..will yield Trumpet's unique traits.
      
       family: Brass
       pitch: B-flat
@@ -25,15 +24,13 @@
       reads Treble Clef 
 
   
-  2. Get information about a group of instruments
-  Searching...
+2. Get information about a group of instruments.
 
       Name: 
       Family: Strings
       Clef:
 
-  will yield all instruments that are a part of the strings family
-  ,along with each instrument's unique traits.
+will yield all instruments that are a part of the strings family. --along with the instrument's name, each instrument's unique traits will be displayed also.
 
       Harpsichord
       Violin
@@ -43,27 +40,43 @@
       Double Bass
       Guitar
   
-  Likewise, searching by multiple fields...
+Likewise, searching by multiple fields..  
 
       Name: 
       Family: Strings
-      Clef: Treble
+      Clef: Treble  
 
-  will yield the instruments that are a part of the strings family and also read treble clef.
+..will yield the instruments that are a part of the strings family and also read treble clef.  
 
       Violin
       Guitar
 
 ## Technologies Used
  
-  React.js
-      Main Search UI
-      Admin UI for database maintenance
+1. React.js
+      *Main Search UI  
+      *Admin UI
 
-  Node.js/Express.js
-      Server and API
+2. Node.js
+      *Used Node along with Express.js to write a simple server, and a straight forward API to support client side requests with endpoints as follows... 
+      *  
+```javascript
+//single endpoint for all search requests.
+router.get('/search', (req,res) =>{})
 
-  PostgreSQL
+//used to prepopulate form options for user
+router.get('/families', (req,res) =>{})
+router.get('/clefs',  (req,res) =>{})
+router.get('/sounds', (req,res) =>{})
+router.get('/transposes', (req,res) =>{})
+
+//endpoints accessible to Admin UI
+//makes database maintenance simple and straightforward.
+router.post('/instrument/update', (req,res) =>{})
+router.put('/instrument/create', (req,res) =>{})
+router.delete('/instrument/delete', (req,res) =>{})
+```
+3. PostgreSQL
       Database
 
 

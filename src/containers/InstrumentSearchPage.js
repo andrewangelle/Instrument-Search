@@ -1,25 +1,26 @@
 import React from 'react';
 import InstrumentSearchForm from '../components/InstrumentSearchForm';
 
-
 export default class InstrumentSearchPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       families:[],
       clefs:[],
-      searchQuery: {},
-      searchResults:{}
+      searchResults: []
     };
+    this.updateSearchResults = this.updateSearchResults.bind(this);
   }
-
-//fire getInstrumentSearchResults when user submits form
-//then fetch results from database
-//then update state
   updateSearchResults(results) {
-    this.setState({searchQuery: results});
+        this.setState({
+          searchResults: results
+        });    
   }
   getInstrumentSearchResults(form) {
+    //fires when user submits with form values
+    //constructs query string params
+    //queries database
+    //stores results in container's state   
     const construct = require('qs-hash');
     var url = `?${construct.qsString(form, 'noencode')}`;
     fetch('api/search'+url)
@@ -27,15 +28,13 @@ export default class InstrumentSearchPage extends React.Component {
         return response.json();
       })
       .then(results => {
-        this.updateSearchResults(results);
         console.log(results);
       });
   }
-
-//Fetch from database 
-//all potential values 
-//then store in this.state 
   componentDidMount() {
+    //before render
+    //Fetch from database all potential values for user form inputs 
+    //then store in container's state 
     fetch('/api/families')
       .then(response => {
         return response.json()
@@ -55,7 +54,6 @@ export default class InstrumentSearchPage extends React.Component {
         });
       });    
   }
-
   render() {
     return(
       <div>
