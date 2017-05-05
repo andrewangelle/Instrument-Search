@@ -7,19 +7,18 @@ export default class InstrumentSearchPage extends React.Component {
     this.state = {
       families:[],
       clefs:[],
-      searchResults: []
+      results: {}
     };
-    this.updateSearchResults = this.updateSearchResults.bind(this);
   }
-  updateSearchResults(results) {
-        this.setState({
-          searchResults: results
-        });    
+  updateResults(results) {
+    this.setState({
+      results: results
+    });     
   }
   getInstrumentSearchResults(form) {
-    //fires when user submits with form values
-    //constructs query string params
-    //queries database
+    //fires when user submits form
+    //constructs query string params with form values
+    //fetch API call to query database for search results
     //stores results in container's state   
     const construct = require('qs-hash');
     var url = `?${construct.qsString(form, 'noencode')}`;
@@ -28,7 +27,10 @@ export default class InstrumentSearchPage extends React.Component {
         return response.json();
       })
       .then(results => {
-        console.log(results);
+        this.updateResults(results);
+      })
+      .catch(err => {
+        console.log(err);
       });
   }
   componentDidMount() {
@@ -60,9 +62,10 @@ export default class InstrumentSearchPage extends React.Component {
         <InstrumentSearchForm
           families={this.state.families}
           clefs={this.state.clefs}
+          results={this.state.results}
           getInstrumentSearchResults={this.getInstrumentSearchResults}
+          updateResults={this.updateResults.bind(this)}
         />
-        <hr />
       </div>  
     );
   }

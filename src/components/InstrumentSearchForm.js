@@ -5,7 +5,7 @@ export default class InstrumentSearchForm extends React.Component {
     super(props);
     this.state = {
       form: {}
-    }
+    };
   }
   handleChange(event) {
     this.setState({
