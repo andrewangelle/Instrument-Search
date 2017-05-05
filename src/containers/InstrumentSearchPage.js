@@ -1,5 +1,6 @@
 import React from 'react';
 import InstrumentSearchForm from '../components/InstrumentSearchForm';
+import InstrumentSearchResults from '../components/InstrumentSearchResults';
 
 export default class InstrumentSearchPage extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ export default class InstrumentSearchPage extends React.Component {
     this.state = {
       families:[],
       clefs:[],
-      results: {}
+      results: []
     };
   }
   updateResults(results) {
@@ -65,6 +66,10 @@ export default class InstrumentSearchPage extends React.Component {
           results={this.state.results}
           getInstrumentSearchResults={this.getInstrumentSearchResults}
           updateResults={this.updateResults.bind(this)}
+        />
+        <hr />
+        <InstrumentSearchResults
+          results={this.state.results}
         />
       </div>  
     );
