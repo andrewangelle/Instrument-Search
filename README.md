@@ -49,10 +49,12 @@ The list includes all instruments that are a part of the strings family. --along
         Family: Strings
         Clef: Treble  
 
-        ..will result in:
+        ..will results in:
 
         Violin
         Guitar
+
+        ..The results of instruments that are both in the strings family and read treble clef.
 
 ## Technologies Used
  
