@@ -30,38 +30,38 @@ export default class InstrumentSearchForm extends React.Component {
           		 onChange={this.handleChange.bind(this)} 
           		/>
         </label>
-        <br />
-        <br />
+          <br />
+          <br />
         <label>
           Family:
           <select type="dropdown"
-          		  name="family"
-          		  value={this.state.form.family}
-          		  onChange={this.handleChange.bind(this)}
-                >
+        		      name="family"
+        		      value={this.state.form.family}
+        		      onChange={this.handleChange.bind(this)}
+                  >
             <option></option>
             {this.props.families.map(family =>
             <option key={family}>{family}</option>
             )}
           </select>
         </label>
-        <br />
-        <br />
+          <br />
+          <br />
         <label>
           Clef:
           <select type="dropdown"
-          		  name="clef"
-          		  value={this.state.form.clef}
-          		  onChange={this.handleChange.bind(this)}
-          		  >
+        		      name="clef"
+        		      value={this.state.form.clef}
+        		      onChange={this.handleChange.bind(this)}
+        		      >
             <option></option>  
             {this.props.clefs.map(clef =>
             <option key={clef}>{clef}</option>
             )}          		
           </select>
         </label>
-        <br />
-        <br />
+          <br />
+          <br />
         <input type="submit" value="Submit" />
       </form>
     </div>
