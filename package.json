@@ -5,6 +5,7 @@
   "proxy": "http://localhost:8080",
   "dependencies": {
     "body-parser": "~1.0.1",
+    "bootstrap": "^4.0.0-alpha.6",
     "db-migrate": "^0.10.0-beta.20",
     "db-migrate-pg": "^0.1.11",
     "dotenv": "^4.0.0",
