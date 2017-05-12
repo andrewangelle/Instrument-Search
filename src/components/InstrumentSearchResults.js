@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { SplitButton,
-         MenuItem } from 'react-bootstrap';
+import { ListGroup,
+         ListGroupItem } from 'reactstrap';
+import './style.css';
 
 export default class InstrumentSearchResults extends Component {
   constructor(props){
@@ -10,22 +11,23 @@ export default class InstrumentSearchResults extends Component {
     };
   }
   render() {
-    return (
-      <div>
-        {this.props.results.map(instrument => 
-          <SplitButton bsStyle="primary"
-                      title={instrument.name}
-                      key={instrument.id}>
-            <MenuItem key={instrument.family}>{instrument.family}</MenuItem>
-            <MenuItem key={instrument.clef}>{instrument.clef}</MenuItem>
-            <MenuItem key={instrument.sounds}>{instrument.sounds}</MenuItem>
-            <MenuItem key={instrument.transposes}>{instrument.transposes}</MenuItem>
-          </SplitButton>
-        )}
-      </div>
-    );
+      return (
+        <ListGroup>
+          {this.props.results.map(instrument => 
+          <ListGroupItem key={instrument.id}>
+            {`
+              ${instrument.name} 
+              ${instrument.family}
+              ${instrument.clef}
+              ${instrument.sounds}
+              ${instrument.transposes}
+            `}
+          </ListGroupItem>
+          )}
+        </ListGroup>  
+      );
+    }
   }  
-}
 
 
 
