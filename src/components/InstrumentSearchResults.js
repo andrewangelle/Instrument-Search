@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import { ListGroup,
-         ListGroupItem } from 'reactstrap';
+import { Media } from 'reactstrap';
 import './style.css';
 
 export default class InstrumentSearchResults extends Component {
@@ -12,19 +11,23 @@ export default class InstrumentSearchResults extends Component {
   }
   render() {
       return (
-        <ListGroup>
+        <Media>
           {this.props.results.map(instrument => 
-          <ListGroupItem key={instrument.id}>
-            {`
-              ${instrument.name} 
-              ${instrument.family}
-              ${instrument.clef}
-              ${instrument.sounds}
-              ${instrument.transposes}
-            `}
-          </ListGroupItem>
+            <Media body
+                   key={instrument.id}
+                  >
+              <Media heading>
+                {`${instrument.name}`}
+              </Media>
+              {`
+                (Family:${instrument.family})
+                (Reads:${instrument.clef} Clef)
+                (Sounds at:${instrument.sounds})
+                (Transposes by and interval of:${instrument.transposes})
+              `}
+            </Media>
           )}
-        </ListGroup>  
+        </Media> 
       );
     }
   }  
