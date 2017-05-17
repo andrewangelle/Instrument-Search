@@ -1,4 +1,10 @@
 import React from 'react';
+import './style.css';
+import { Button,
+         Form,
+         FormGroup,
+         Label,
+         Input } from 'reactstrap';
 
 export default class InstrumentSearchForm extends React.Component {
   constructor(props){
@@ -17,54 +23,51 @@ export default class InstrumentSearchForm extends React.Component {
   }
   render() {
     return (
-     <div> 
-      <form onSubmit={event => {
-      	event.preventDefault();
-      	this.props.getInstrumentSearchResults(this.state.form);
-      }}>
-        <label>
-          Name:
-          <input type="text"
-          		 name="name"
-          		 value={this.state.form.name}
-          		 onChange={this.handleChange.bind(this)} 
-          		/>
-        </label>
-          <br />
-          <br />
-        <label>
-          Family:
-          <select type="dropdown"
-        		      name="family"
-        		      value={this.state.form.family}
-        		      onChange={this.handleChange.bind(this)}
+      <div> 
+        <Form onSubmit={event => {
+                         event.preventDefault();
+                         this.props.getInstrumentSearchResults(this.state.form);
+                        }}>
+          <FormGroup>
+            <Label>Name</Label>
+              <Input name="name"
+                     value={this.state.form.name}
+                     onChange={this.handleChange.bind(this)}
+                     className="form-input search" 
+                    >
+              </Input>    
+          </FormGroup>
+          <FormGroup>
+            <Label>Family</Label>
+            <Input type="select"
+                   name="family"
+                   value={this.state.form.family}
+                   onChange={this.handleChange.bind(this)}
+                   className="form-input search"
                   >
-            <option></option>
-            {this.props.families.map(family =>
-            <option key={family}>{family}</option>
-            )}
-          </select>
-        </label>
-          <br />
-          <br />
-        <label>
-          Clef:
-          <select type="dropdown"
-        		      name="clef"
-        		      value={this.state.form.clef}
-        		      onChange={this.handleChange.bind(this)}
-        		      >
-            <option></option>  
-            {this.props.clefs.map(clef =>
-            <option key={clef}>{clef}</option>
-            )}          		
-          </select>
-        </label>
-          <br />
-          <br />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
+              <option></option>
+              {this.props.families.map(family =>
+              <option key={family}>{family}</option>
+              )}              
+            </Input>
+          </FormGroup>
+            <FormGroup>
+            <Label>Clef</Label>
+            <Input type="select"
+                   name="clef"
+                   value={this.state.form.clef}
+                   onChange={this.handleChange.bind(this)}
+                   className="form-input search"
+                  >
+              <option></option>
+              {this.props.clefs.map(clef =>
+              <option key={clef}>{clef}</option>
+              )}              
+            </Input>
+          </FormGroup>
+          <Button>Submit</Button>
+        </Form>        
+      </div>
     );
   }
 }
