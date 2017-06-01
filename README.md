@@ -58,15 +58,41 @@ The list includes all instruments that are a part of the strings family. --along
 
 ## Technologies Used
  
-1. React.js  
-  *Main Search UI    
-  *Admin UI  
+### React.js
+* Front-end  
+* Main Search UI    
+* Admin UI  
 
-2. Node.js  
-  *Used Node along with Express.js to write a simple server that supports an API to handle database queries and give back JSON to client side requests. 
+### Node.js  
+* Simple server with API that gives back JSON to client side requests
 
-3. PostgreSQL  
-      Database
+#### API
+
+##### REST Routes
+
+###### Search Route
+*`GET /api/search`
+  * `?name=$name`
+  * `?family=$family`
+  * `?clef=$clef`
+
+###### Instrument Routes
+* `GET /api/family`
+  * returns all possible families
+* `GET /api/clefs`
+  * returns all possible clefs
+* `GET /api/sounds`
+  * returns all possible 'sounds at' parameters
+* `GET /api/transposes`
+  * returns all possible 'transposes by' parameters
+
+###### Admin Routes
+* `POST /instrument/update`
+* `GET /instrument/create`
+* `GET /instrument/delete`
+
+### PostgreSQL  
+* Database
 
 
 ## License
