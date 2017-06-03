@@ -10,57 +10,27 @@
 ## Description
 
 1. Get information about a single instrument.  
-For example, searching for by name will yield Trumpet's unique traits.
 
 ![screenshot-name-results](images/Tuba.jpg)
 
-        Name: Trumpet  
-        Family:  
-        Clef:    
-  
-       ..will result in:
-     
-        family: Brass
-        pitch: B-flat
-        sounds at: M2 lower ..(relative to concert pitch)
-        transposes: M2 higher ..(to match concert pitch)
-        reads Treble Clef 
 
   
 2. Get information about a group of instruments.
 
-![screenshot-family-results](images/strings.jpg)  
-
-        Name: 
-        Family: Strings
-        Clef:
-
-        ..will result in:
-
-        Harpsichord
-        Violin
-        Cello
-        Viola
-        Harp
-        Double Bass
-        Guitar  
-
-The list includes all instruments that are a part of the strings family. --along with the instrument's name, each instrument's unique traits will also be displayed.--  
+  *For example, let's see all of the instruments in the strings ...
   
-3. Likewise, searching by multiple fields will yield the instruments that meet both criteria.  
+![screenshot-family-results](images/stings.jpg)  
+  
+ 
+  
+3. Filtering by multiple fields.
+
+  *All instruments that are in the strings family AND read the treble clef...
 
 ![screenshot-family-clef-results](images/strings-treble.jpg)
 
-        Name: 
-        Family: Strings
-        Clef: Treble  
 
-        ..will results in:
-
-        Violin
-        Guitar
-
-        ..The results of instruments that are both in the strings family and read treble clef.
+The results of instruments 
 
 ## Technologies Used
  
@@ -82,15 +52,12 @@ The list includes all instruments that are a part of the strings family. --along
   * `?family=$family`
   * `?clef=$clef`
 
-###### Instrument Routes
-* `GET /api/family`
-  * returns all possible families
-* `GET /api/clefs`
-  * returns all possible clefs
-* `GET /api/sounds`
-  * returns all possible 'sounds at' parameters
-* `GET /api/transposes`
-  * returns all possible 'transposes by' parameters
+###### Instrument Routes 
+* return an object with all possible values relative the endpoint
+  * `GET /api/family`
+  * `GET /api/clefs`
+  * `GET /api/sounds`
+  * `GET /api/transposes`
 
 ###### Admin Routes
 * `POST /instrument/update`
