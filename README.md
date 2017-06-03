@@ -8,15 +8,18 @@
   https://orchestral-instrument-database.herokuapp.com
 
 ## Description
-*Get information about a single instrument.  
+### Get information about a single instrument.  
+
 ![screenshot-name-results](images/Tuba.jpg)
 
-*Get information about a group of instruments.
-  *For example, all of the instruments in the strings family...
+### Get information about a group of instruments.
+* For example, all of the instruments in the strings family...  
+
 ![screenshot-family-results](images/stings.jpg)  
   
-*Filtering by multiple fields.
-  *For example, all of the instruments that are in the strings family AND read treble clef...
+### Filter by multiple fields.
+* For example, all of the instruments that are in the strings family AND read treble clef...  
+
 ![screenshot-family-clef-results](images/strings-treble.jpg)
 
 ## Technologies Used
