@@ -8,16 +8,16 @@
   https://orchestral-instrument-database.herokuapp.com
 
 ## Description
-### Get information about a single instrument.  
+#### Get information about a single instrument.  
 
 ![screenshot-name-results](images/Tuba.jpg)
 
-### Get information about a group of instruments.
+#### Get information about a group of instruments.
 * For example, all of the instruments in the strings family...  
 
 ![screenshot-family-results](images/stings.jpg)  
   
-### Filter by multiple fields.
+#### Filter by multiple fields.
 * For example, all of the instruments that are in the strings family AND read treble clef...  
 
 ![screenshot-family-clef-results](images/strings-treble.jpg)
@@ -43,7 +43,7 @@
   * `?clef=$clef`
 
 ###### Instrument Routes 
-* return an object with all possible values relative the endpoint
+* return an object with all possible values relative to the endpoint
   * `GET /api/family`
   * `GET /api/clefs`
   * `GET /api/sounds`
